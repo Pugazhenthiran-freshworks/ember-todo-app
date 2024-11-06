@@ -1,0 +1,47 @@
+ul {
+    li {
+        margin: 5px 0;
+    }
+}
+
+.pendingBtn,
+.inProgressBtn,
+.completeBtn,
+.deleteBtn {
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pendingBtn {
+    background-color: rgb(255, 119, 119);
+}
+
+.inProgressBtn {
+    background-color: rgb(226, 209, 110);
+}
+
+.completeBtn {
+    background-color: rgb(110, 226, 147);
+}
+
+.deleteBtn {
+    background-color: red;
+}
+
+.todoTitleInput {
+    // background-color: transparent;
+    padding: 0.5rem;
+    border: 0.1rem solid rgb(118, 193, 255);
+    border-radius: 0.4rem;
+    outline: none;
+    cursor: pointer;
+    max-width: 200px;
+    min-width: fit-content;
+
+    &:not(:focus) {
+        border: none;
+    }
+}

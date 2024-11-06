@@ -1,0 +1,56 @@
+<h1>To-Do List</h1>
+
+<input aria-label="Title" placeholder="Title" type="text" value={{this.newTodoTitle}} {{on "input" this.onChangeInput}}
+    {{on "keypress" this.onKeyPress}} />
+
+<button type="button" {{on 'click' this.addTodo}}>
+    Add Todo
+</button>
+
+<h2>Pending</h2>
+<ul>
+    {{#each this.pendingTodos as |todo|}}
+    <li data-id={{todo.id}} data-status={{todo.status}}>
+        {{!-- <span>{{todo.title}}</span> --}}
+        <input class="todoTitleInput" aria-label={{todo.title}} {{on "blur" (fn this.onEditTaskTitle todo.id)}}
+            value={{todo.title}} />
+        <button class="inProgressBtn" type="button" {{on "click" (fn this.updateStatus todo.id "inProgress"
+            )}}>Start</button>
+        <button class="completeBtn" type="button" {{on "click" (fn this.updateStatus todo.id "completed"
+            )}}>Complete</button>
+        <button class="deleteBtn" type="button" {{on "click" (fn this.deleteTodo todo.id)}}>Delete</button>
+    </li>
+    {{/each}}
+</ul>
+
+<h2>In Progress</h2>
+<ul>
+    {{#each this.inProgressTodos as |todo|}}
+    <li data-id={{todo.id}} data-status={{todo.status}}>
+        {{!-- <span>{{todo.title}}</span> --}}
+        <input class="todoTitleInput" aria-label={{todo.title}} {{on "blur" (fn this.onEditTaskTitle todo.id)}}
+            value={{todo.title}} />
+        <button class="pendingBtn" type="button" {{on "click" (fn this.updateStatus todo.id 'pending' )}}>Move to
+            Pending</button>
+        <button class="completeBtn" type="button" {{on "click" (fn this.updateStatus todo.id 'completed'
+            )}}>Complete</button>
+        <button class="deleteBtn" type="button" {{on 'click' (fn this.deleteTodo todo.id)}}>Delete</button>
+    </li>
+    {{/each}}
+</ul>
+
+<h2>Completed</h2>
+<ul>
+    {{#each this.completedTodos as |todo|}}
+    <li data-id={{todo.id}} data-status={{todo.status}}>
+        {{!-- <span>{{todo.title}}</span> --}}
+        <input class="todoTitleInput" aria-label={{todo.title}} {{on "blur" (fn this.onEditTaskTitle todo.id)}}
+            value={{todo.title}} />
+        <button class="inProgressBtn" type="button" {{on "click" (fn this.updateStatus todo.id 'inProgress'
+            )}}>Redo</button>
+        <button class="pendingBtn" type="button" {{on "click" (fn this.updateStatus todo.id 'pending' )}}>Move to
+            Pending</button>
+        <button class="deleteBtn" type="button" {{on 'click' (fn this.deleteTodo todo.id)}}>Delete</button>
+    </li>
+    {{/each}}
+</ul>
