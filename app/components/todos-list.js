@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
@@ -38,14 +38,6 @@ export default class TodosListComponent extends Component {
         status: 'pending',
       });
       await newTodo.save();
-      // this.todos = [
-      //   ...this.todos,
-      //   {
-      //     id: Date.now().toString(),
-      //     title: this.newTodoTitle,
-      //     status: 'pending',
-      //   },
-      // ];
       this.newTodoTitle = '';
     }
   }
@@ -55,9 +47,6 @@ export default class TodosListComponent extends Component {
     let todo = this.store.peekRecord('todo', todoId);
     todo.status = status;
     await todo.save();
-    // this.todos = this.todos.map((todo) => {
-    //   return todo.id === todoId ? { ...todo, status } : todo;
-    // });
   }
 
   @action
@@ -65,28 +54,29 @@ export default class TodosListComponent extends Component {
     let todo = this.store.peekRecord('todo', todoId);
     todo.title = e.target.value;
     await todo.save();
-    // this.todos = this.todos.map((todo) => {
-    //   return todo.id === todoId ? { ...todo, title: e.target.value } : todo;
-    // });
   }
 
   @action
   async deleteTodo(deleteTodoId) {
     let todo = this.store.peekRecord('todo', deleteTodoId);
     await todo.destroyRecord();
-    // this.todos = this.todos.filter(({ id }) => id !== deleteTodoId);
   }
 
   getTodos(filterStatus) {
     return this.todos.filter(({ status }) => status === filterStatus);
   }
 
+  @computed('todos.@each.status')
   get pendingTodos() {
     return this.getTodos('pending');
   }
+
+  @computed('todos.@each.status')
   get inProgressTodos() {
     return this.getTodos('inProgress');
   }
+
+  @computed('todos.@each.status')
   get completedTodos() {
     return this.getTodos('completed');
   }
