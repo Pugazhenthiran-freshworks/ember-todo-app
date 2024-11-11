@@ -1,0 +1,24 @@
+<li>
+  <input
+    class="todoTitleInput"
+    aria-label={{@todo.title}}
+    {{on "blur" (fn @onEditTaskTitle @todo.id)}}
+    value={{@todo.title}}
+  />
+  {{#each @statusActions as |action|}}
+    <button
+      class="{{action.buttonClass}}"
+      type="button"
+      {{on "click" (fn @updateStatus @todo.id action.status)}}
+    >
+      {{action.label}}
+    </button>
+  {{/each}}
+  <button
+    class="deleteBtn"
+    type="button"
+    {{on "click" (fn @deleteTodo @todo.id)}}
+  >
+    Delete
+  </button>
+</li>

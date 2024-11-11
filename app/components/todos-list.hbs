@@ -1,0 +1,35 @@
+<h1>To-Do List</h1>
+
+<input aria-label="Title" placeholder="Title" type="text" value={{this.newTodoTitle}} {{on "input" this.onChangeInput}}
+    {{on "keypress" this.onKeyPress}} />
+
+<button type="button" {{on 'click' this.addTodo}}>
+    Add Todo
+</button>
+
+<h2>Pending</h2>
+<ul>
+    {{#each this.pendingTodos as |todo|}}
+    <TodoItem @todo={{todo}} @onEditTaskTitle={{this.onEditTaskTitle}} @updateStatus={{this.updateStatus}}
+        @deleteTodo={{this.deleteTodo}} @statusActions={{array (hash buttonClass="inProgressBtn" status="inProgress"
+        label="Start" ) (hash buttonClass="completeBtn" status="completed" label="Complete" ) }} />
+    {{/each}}
+</ul>
+
+<h2>In Progress</h2>
+<ul>
+    {{#each this.inProgressTodos as |todo|}}
+    <TodoItem @todo={{todo}} @onEditTaskTitle={{this.onEditTaskTitle}} @updateStatus={{this.updateStatus}}
+        @deleteTodo={{this.deleteTodo}} @statusActions={{array (hash buttonClass="pendingBtn" status="pending"
+        label="Move to Pending" ) (hash buttonClass="completeBtn" status="completed" label="Complete" ) }} />
+    {{/each}}
+</ul>
+
+<h2>Completed</h2>
+<ul>
+    {{#each this.completedTodos as |todo|}}
+    <TodoItem @todo={{todo}} @onEditTaskTitle={{this.onEditTaskTitle}} @updateStatus={{this.updateStatus}}
+        @deleteTodo={{this.deleteTodo}} @statusActions={{array (hash buttonClass="pendingBtn" status="pending" label="Move to Pending" ) (hash buttonClass="inProgressBtn" status="inProgress"
+        label="Start" ) }} />
+    {{/each}}
+</ul>
