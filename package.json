@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
-    "@ember/render-modifiers": "^2.1.0",
     "@ember/test-helpers": "^2.2.5",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
@@ -48,7 +47,6 @@
     "ember-page-title": "^6.2.2",
     "ember-qunit": "^5.1.4",
     "ember-resolver": "^8.0.2",
-    "ember-sortablejs": "^2.0.0-beta.6",
     "ember-source": "~3.27.2",
     "ember-template-lint": "^3.4.2",
     "ember-welcome-page": "^4.0.0",
@@ -63,8 +61,7 @@
     "prettier": "^2.3.0",
     "qunit": "^2.15.0",
     "qunit-dom": "^1.6.0",
-    "sass": "^1.80.6",
-    "sortablejs": "^1.15.3"
+    "sass": "^1.80.6"
   },
   "engines": {
     "node": "10.* || >= 12"
